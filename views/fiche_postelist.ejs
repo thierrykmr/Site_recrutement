@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head><body>
+    <h1>
+        <%= title %>
+    </h1>
+    <table border>
+        <thead>
+            <tr>
+                <th>Numero</th>
+                <th>Intitule</th>
+                <th>Status</th>
+                <th>Responsabilite</th>
+                <th>Lieu</th>
+                <th>Type_metier</th>
+                <th>Rythme</th>
+                <th>Fourchette_salaire</th>
+                <th>Description</th>
+                <th>Id_offre</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% fiche_poste.forEach((fiche_poste)=> { %>
+                <tr>
+                    <td>
+                        <%= fiche_poste.numero %>
+                    </td>
+                    <td>
+                        <%= fiche_poste.intitule %>
+                    </td>
+                    <td>
+                        <%= fiche_poste.statut %>
+                    </td>
+                    <td>
+                        <%= fiche_poste.responsabilite %>
+                    </td>
+                    <td>
+                        <%= fiche_poste.lieu %>
+                    </td>
+                    <td>
+                        <%= fiche_poste.type_metier %>
+                    </td>
+                    <td>
+                        <%= fiche_poste.rythme %>
+                    </td>
+                    <td>
+                        <%= fiche_poste.fourchette_salaire %>
+                    </td>
+                    <td>
+                        <%= fiche_poste.description %>
+                    </td>
+                    <td>
+                        <%= fiche_poste.id_offre %>
+                    </td>
+
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+
+</body>

@@ -1,0 +1,146 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Les documents à televerser</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    .fakeimg {
+      height: 200px;
+      background: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="p-5 bg-primary text-white text-center">
+    <h1>Veuillez nous envoyer les documents suivants</h1>
+    <p>CV et lettre de motivation</p>
+  </div>
+
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Active</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <form method="post" action="/elementsCandidature">
+      <p><label for="cv">Veuillez inserez votre CV:</label><input id="cv" type="file" accept="pdf" name="cv" required /></p>
+      <p> <label for="lettremotiv">Veuillez inserez votre Lettre de Motivation:</label><input id="lettremotiv" name="lettremotiv"
+          type="file" accept="pdf" required /></p>
+      <p> <label for="cni">Veuillez inserez votre Lettre de Motivation:</label><input id="cni" name="cni"
+            type="file" accept="pdf" required /></p>
+      <p><input type="submit" value="Envoyer" /></p>
+
+    </form>
+  </div>
+
+  <div class="mt-5 p-4 bg-dark text-white text-center">
+    <p></p>
+  </div>
+
+</body>
+
+</html>-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Express file upload</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <section>
+      <div class="row">
+  			<div class="div-cadre col-10 offset-1 col-lg-8 offset-lg-2">
+          <form method="post" action="upload" id="frmFileUpload" enctype="multipart/form-data">
+            <input type="hidden" name="myUsername" value="<%= connected_user.login %>" />
+            <div class="row">
+              <div class="col div-titre"><%= connected_user.prenom %> - Chargement de fichier avec multer</div>
+            </div>
+
+            <div class="row" style="margin-bottom:5px;">
+              <div class="col-8 offset-2">
+                <select class="form-select" id="file_type" name="myFileType" required="true">
+                  <option value="">--- Type du document ---</option>
+                  <option value="CV">C.V.</option>
+                  <option value="LM">L.M.</option>
+                  <option value="CIN">Carte d'identité</option>
+                </select>  
+              </div>
+            </div>
+
+            <div class="row" style="margin-bottom:5px;">
+              <div class="col-8 offset-2">
+                <input class="form-control" id="fileInput" name="myFileInput" type="file" accept="image/*,.pdf" required="true" />
+              </div>
+            </div>
+
+            <div class="row" style="margin-bottom:5px;">
+              <div class="col text-center">
+                <a title="Charger le fichier">
+                  <button type="submit" class="btn btn-primary">Charger le fichier</button>
+                </a>
+                </div>
+            </div>
+
+<% if(typeof uploaded_filename != 'undefined' && typeof uploaded_original != 'undefined') { %>                  
+            <div class="row" style="margin: 10px 0px;">
+              <div class="col text-center">
+                <span>Le fichier <strong><%= uploaded_original %></strong> a bien été chargé sous le nom <strong><%= uploaded_filename %></strong>.</span>
+              </div>
+            </div>
+<% } %>                  
+
+<% if(typeof upload_error != 'undefined') { %>                  
+            <div class="row" style="margin: 10px 0px;">
+              <div class="col text-center text-red">
+                <span><strong><%= upload_error %></strong></span>
+              </div>
+            </div>
+<% } %>                  
+          </form>
+			  </div>
+      </div>			
+
+      <div class="row">
+  			<div class="div-cadre col-10 offset-1 col-lg-8 offset-lg-2">
+          <ul>
+<% files_array.forEach((oneFile) => { %>
+              <li><a href="upload/getfile?fichier_cible=<%= oneFile %>" target="_blank"><%= oneFile %></a></li>                   
+<% }) %>          
+          </ul>
+        </div>
+      </div>
+
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+  </body>
+</html>

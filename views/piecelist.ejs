@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head><body>
+    <h1>
+        <%= title %>
+    </h1>
+   Voici ma liste de pieces
+   <table border>
+    <thead>
+        <tr>
+            <th>lieu</th>
+            <th>CV</th>
+            <th>lettre de motivation</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <% piece.forEach((piece)=> { %>
+            <tr>
+                <td>
+                    <%= piece.lieu %>
+                </td>
+                <td>
+                    <%= piece.CV %>
+                </td>
+                <td>
+                    <%= piece.lettremotiv %>
+                </td>
+                
+            </tr>
+            <% }) %>
+    </tbody>
+</table>
+
+</body>
+</html>

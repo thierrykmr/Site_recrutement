@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+   <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js" ></script>
+   <script src="https://cdn.datatables.net/searchpanes/2.1.2/js/dataTables.searchPanes.min.js"></script>
+   <script src="https://cdn.datatables.net/select/1.6.2/js/dataTables.select.min.js"></script>
+
+   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"/>
+   <link rel="stylesheet" href="https://cdn.datatables.net/searchpanes/2.1.2/css/searchPanes.dataTables.min.css"/>
+   <link rel="stylesheet" href="https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css"/>
+
+
+
+    <script>$(document).ready(function() {
+        $('#example').DataTable({
+            dom: 'Plfrtip',
+            searchPanes: {
+                initCollapsed: true
+            }
+        });
+    });</script>
+  </head><body>
+    <h1>
+        <%= title %>
+    </h1>
+    Ma liste d'organisation
+    <table border id="example" class="display nowrap" style="width:100%">
+        <thead>
+            <tr>
+                <th>SIREN</th>
+                <th>Name_company</th>
+                <th>Siege-social</th>
+                <th>Type_company</th>
+                <th>Status</th>
+                <th> Supprimer </th>
+            </tr>
+        </thead>
+        <tbody>
+            <% organisation.forEach((organisation)=> { %>
+                <tr id="<%= organisation.siren %>"></tr>
+                <tr>
+                    <td>
+                        <%= organisation.siren %>
+                    </td>
+                    <td>
+                        <%= organisation.nom%>
+                    </td>
+                    <td>
+                        <%= organisation.siege_social %>
+                    </td>
+                    <td>
+                        <%= organisation.type %>
+                    </td> 
+                    <td>
+                        <%= organisation.statut %>
+                    </td>
+                    <td>
+                        <button onClick="fetch('/organisation/<%=organisation.siren%>', { method: 'DELETE' })
+                        .then(() => { 
+                                        let element = document.getElementById('<%= organisation.siren %>');
+                                        element.parentNode.removeChild(element);  
+                                        alert(' <%=organisation.siren%> est supprimé');
+                                    })"> supprimer </button>
+                    </td>
+
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
+
+</body>
+</html>

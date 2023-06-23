@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+   <!-- <link rel='stylesheet' href='    https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css
+    ' />
+    <link rel='stylesheet' href='https://cdn.datatables.net/searchpanes/2.1.2/css/searchPanes.dataTables.min.css
+    ' />
+    <link rel='stylesheet' href='https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css
+    ' />
+    <link rel='stylesheet' href='https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css
+    ' />
+   -->
+
+
+
+  
+
+
+    <link rel='stylesheet' href='https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css' />
+    <link rel='stylesheet' href='https://cdn.datatables.net/searchpanes/2.1.2/css/searchPanes.dataTables.min.css' />
+    <link rel='stylesheet' href='https://cdn.datatables.net/select/1.6.2/css/select.dataTables.min.css' />
+
+
+
+
+
+
+    
+
+ 
+
+     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+     <script src="
+     https://cdn.datatables.net/searchpanes/2.1.2/js/dataTables.searchPanes.min.js"></script>
+     <script src="https://cdn.datatables.net/select/1.6.2/js/dataTables.select.min.js"></script>
+
+
+
+
+
+<!--
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.datatables.net/searchpanes/2.1.2/js/dataTables.searchPanes.min.js
+    "></script>
+    <script src="https://cdn.datatables.net/select/1.6.2/js/dataTables.select.min.js
+    "></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js
+    "></script>
+-->
+  <!--  <script>
+      $(document).ready(function () {
+        $('#example').DataTable({
+        buttons: [
+            {
+                extend: 'searchPanes',
+                config: {
+                    cascadePanes: true
+                }
+            }
+        ],
+        dom: 'Bfrtip'
+    });
+});
+    </script>-->
+
+
+<script>
+  $(document).ready(function() {
+      $('#example').DataTable({
+          searchPanes: {
+              columns: [3,2,1]
+          },
+          dom: 'Plfrtip'
+      });
+  });</script>
+
+
+
+
+    <link href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"  rel ="stylesheet"/>
+  </head>
+  <body>
+    <h1>
+        <%= title %>
+    </h1>
+   Voici ma liste d'utilisateur
+ <table   id="example" class="display nowrap" style="width:100%">
+<thead>
+<tr>
+<th>Firstname</th>
+<th>Lastname</th>
+<th>Email</th>
+<th>Telephone</th>
+<th> Supprimer </th>
+<!--<th> Modifier </th>-->
+
+</tr>
+</thead>
+<tbody>
+<% users.forEach((user)=> { %>
+  <tr id="<%= user.email %>"></tr>
+<tr>
+<td>
+<%= user.prenom %>
+</td>
+<td>
+<%=user.nom %>
+</td>
+<td><a>
+<%= user.email %></a>
+</td>
+<td>
+  <%= user.telephone %>
+</td>
+<td>
+    <button onClick="fetch('/users/<%=user.email%>', { method: 'DELETE' })
+    .then(() => { 
+                    let element = document.getElementById('<%= user.email %>');
+                    element.parentNode.removeChild(element);  
+                    alert(' <%=user.email%> est supprimé');
+                })"> supprimer </button>
+</td>
+<!--<td>
+  <button onClick="fetch('/users/<%=user.email%>', { method: 'UPDATE' })
+  .then(() => { 
+                  let element = document.getElementById('<%= user.email %>');
+                  element.parentNode.removeChild(element);  
+                  alert(' <%=user.email%> est supprimé');
+              })"> supprimer </button>
+</td>-->
+</tr>
+<% }) %>
+</tbody>
+</table>
+
+</body>
+</html>
+
+
+
+
+<!--
+
+<table border>
+  <thead>
+      <tr>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Email</th>
+          <th> Supprimer </th>
+      </tr>
+  </thead>
+  <tbody>
+      <% users.forEach((user)=> { %>
+          <tr id="<%= user.email %>">
+              <td>
+                  <%= user.prenom %>
+              </td>
+              <td>
+                  <%= user.nom %>
+              </td>
+              <td>
+                  <%= user.email %>
+              </td>
+              <td>
+                  <button onClick="fetch('/users/<%=user.email%>', { method: 'DELETE' })
+                  .then(() => { 
+                                  let element = document.getElementById('<%= user.email %>');
+                                  element.parentNode.removeChild(element);  
+                                  alert(' <%=user.email%> est supprimé');
+                              })"> supprimer </button>
+              </td>
+          </tr>
+          <% }) %>
+  </tbody>
+
+</table>
+
+-->

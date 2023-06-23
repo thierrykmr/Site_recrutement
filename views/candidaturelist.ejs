@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>
+        <%= title %>
+    </h1>
+    Ma liste de candidatures
+
+    <table border>
+      <thead>
+          <tr>
+              <th>Date de candidaure'</th>
+              <th>id_offre</th>
+              
+              
+          </tr>
+      </thead>
+      <tbody>
+          <% candidature.forEach((candidature)=> { %>
+              <tr>
+                  <td>
+                      <%= candidature.date_candidature %>
+                  </td>
+                  <td>
+                      <%= candidature.id_offre%>
+                  </td>
+                 
+                  
+
+              </tr>
+              <% }) %>
+      </tbody>
+  </table>
+</body>
+</html>

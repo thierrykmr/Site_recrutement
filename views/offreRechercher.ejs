@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head><body>
+    <h1>
+        <%= title %>
+    </h1>
+    Ma liste d'offre
+    <table border>
+      <thead>
+          <tr>
+              <th>Createur de l'offre</th>
+              <th>Indication</th>
+              <th>Date de validite</th>
+              <th>Nombre de piece</th>
+             <!-- <th>Supprimer</th>-->
+          </tr>
+      </thead>
+      <tbody>
+          <% offre.forEach((offre)=> { %>
+              <tr>
+                  <td>
+                      <%= offre.createur %>
+                  </td>
+                  <td>
+                      <%= offre.indication%>
+                  </td>
+                  <td>
+                      <%= offre.date_validite %>
+                  </td>
+                  <td>
+                      <%= offre.nombre_piece %>
+                  </td> 
+                  <td>
+                    
+                </td> 
+                  
+
+              </tr>
+              <% }) %>
+      </tbody>
+  </table>
+
+</body>
+</html>

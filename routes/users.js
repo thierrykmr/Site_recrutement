@@ -453,26 +453,31 @@ router.post('/users/offrelist', function (req, res, next) {
 
 
 
-/*router.post('/changerType', function (req, res, next) {
-  const { id, nouveauType } = req.body;
 
-  userModel.updateType(id, nouveauType, (err, result) => {
+// Méthode pour mettre à jour le type d'utilisateur
+router.post('/changer-type',function(req,res,next){
+
+  const userId = req.params.id; // Récupérer l'ID de l'utilisateur 
+  const newType = req.body.newType; // Récupérer le nouveau type d'utilisateur depuis le corps de la requête
+  console.log(userId);
+  userModel.updateType(userId, newType,  (err, result) => {
     if (err) {
-      console.error('Erreur lors du changement de type de l\'utilisateur :', err);
-      res.status(500).send('Erreur lors du changement de type de l\'utilisateur');
+      console.error('Erreur lors de la mise à jour du type d\'utilisateur :', err);
+      res.status(500).send('Erreur lors de la mise à jour du type d\'utilisateur');
     } else {
-      res.status(200).send('Type de l\'utilisateur mis à jour avec succès');
+      
+      return result;
+      
     }
+    
   });
-});*/
-
-//router.post('/changerType', changerType);
-
-
-router.get('/changer-type',function(req, res, next) {
-  res.render('changerType');
+  res.redirect('/signin');
+});
+router.get('/changer-type/:id', function(req, res, next) {
+  res.render('changerType', { title: 'Changer le type', id: req.params.id });
   
 });
+
 
 router.get("/candidature/:id", function(req, res, next){
   candidatureModel.create(req.params.id, function(result){
@@ -483,29 +488,6 @@ router.get("/candidature/:id", function(req, res, next){
 
 
 
-
-
-
-// Méthode pour mettre à jour le type d'utilisateur
-router.post('/changer-type',function(req,res,next){
-
-  const userId = req.session.id; // Récupérer l'ID de l'utilisateur 
-  const newType = req.body.newType; // Récupérer le nouveau type d'utilisateur depuis le corps de la requête
-  console.log(userId);
-  userModel.updateType(userId, newType,  (err, result) => {
-    if (err) {
-      console.error('Erreur lors de la mise à jour du type d\'utilisateur :', err);
-      res.status(500).send('Erreur lors de la mise à jour du type d\'utilisateur');
-    } else {
-      res.status(200).send('Type d\'utilisateur mis à jour avec succès');
-    }
-    res.redirect('/users/changer-type');
-  });
-});
-router.get('/changer-type/:id', function(req, res, next) {
-  res.render('changeType', { title: 'Changer le type', id: req.session.id });
-  
-});
 
 
 
